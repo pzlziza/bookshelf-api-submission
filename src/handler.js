@@ -105,7 +105,7 @@ const getAllBooksHandler = (request, h) => {
 
 const getBookByIdHandler = (request, h) => {
   const { id } = request.params;
-  const book = bookshelf.find((book) => book.id === id)[0];
+  const book = bookshelf.find((book) => book.id === id);
 
   if (book !== undefined) {
     const response = h.response({
