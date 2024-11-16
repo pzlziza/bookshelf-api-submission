@@ -11,11 +11,6 @@ const routes = [
     method: "POST",
     path: "/books",
     handler: addBookHandler,
-    routes: {
-      cors: {
-        origin: ["*"],
-      },
-    },
   },
   {
     method: "GET",
