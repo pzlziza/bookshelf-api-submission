@@ -1,5 +1,5 @@
-const { nanoid } = require("nanoid");
-const bookshelf = require("./bookshelf");
+const { nanoid } = require('nanoid');
+const bookshelf = require('./bookshelf');
 
 const addBookHandler = (request, h) => {
   const {
@@ -35,17 +35,17 @@ const addBookHandler = (request, h) => {
 
   if (!name) {
     const response = h.response({
-      status: "fail",
-      message: "Gagal menambahkan buku. Mohon isi nama buku",
+      status: 'fail',
+      message: 'Gagal menambahkan buku. Mohon isi nama buku',
     });
     response.code(400);
     return response;
   }
   if (readPage > pageCount) {
     const response = h.response({
-      status: "fail",
+      status: 'fail',
       message:
-        "Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount",
+        'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
     });
     response.code(400);
     return response;
@@ -54,8 +54,8 @@ const addBookHandler = (request, h) => {
   const isSuccess = bookshelf.filter((b) => b.id === id).length > 0;
   if (isSuccess) {
     const response = h.response({
-      status: "success",
-      message: "Buku berhasil ditambahkan",
+      status: 'success',
+      message: 'Buku berhasil ditambahkan',
       data: {
         bookId: id,
       },
@@ -75,22 +75,22 @@ const getAllBooksHandler = (request, h) => {
     );
   }
 
-  if (reading === "0") {
+  if (reading === '0') {
     getBookFiltered = bookshelf.filter((book) => book.reading === false);
   }
-  if (reading === "1") {
+  if (reading === '1') {
     getBookFiltered = bookshelf.filter((book) => book.reading === true);
   }
 
-  if (finished === "0") {
+  if (finished === '0') {
     getBookFiltered = bookshelf.filter((book) => book.finished === false);
   }
-  if (finished === "1") {
+  if (finished === '1') {
     getBookFiltered = bookshelf.filter((book) => book.finished === true);
   }
 
   const response = h.response({
-    status: "success",
+    status: 'success',
     data: {
       books: getBookFiltered.map((book) => ({
         id: book.id,
@@ -109,7 +109,7 @@ const getBookByIdHandler = (request, h) => {
 
   if (book !== undefined) {
     const response = h.response({
-      status: "success",
+      status: 'success',
       data: {
         book,
       },
@@ -118,8 +118,8 @@ const getBookByIdHandler = (request, h) => {
     return response;
   }
   const response = h.response({
-    status: "fail",
-    message: "Buku tidak ditemukan",
+    status: 'fail',
+    message: 'Buku tidak ditemukan',
   });
   response.code(404);
   return response;
@@ -141,25 +141,25 @@ const editBookByIdHandler = (request, h) => {
 
   if (!name) {
     const response = h.response({
-      status: "fail",
-      message: "Gagal memperbarui buku. Mohon isi nama buku",
+      status: 'fail',
+      message: 'Gagal memperbarui buku. Mohon isi nama buku',
     });
     response.code(400);
     return response;
   }
   if (readPage > pageCount) {
     const response = h.response({
-      status: "fail",
+      status: 'fail',
       message:
-        "Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount",
+        'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
     });
     response.code(400);
     return response;
   }
   if (bookIndex === -1) {
     const response = h.response({
-      status: "fail",
-      message: "Gagal memperbarui buku. Id tidak ditemukan",
+      status: 'fail',
+      message: 'Gagal memperbarui buku. Id tidak ditemukan',
     });
     response.code(404);
     return response;
@@ -182,8 +182,8 @@ const editBookByIdHandler = (request, h) => {
     updatedAt,
   };
   const response = h.response({
-    status: "success",
-    message: "Buku berhasil diperbarui",
+    status: 'success',
+    message: 'Buku berhasil diperbarui',
   });
   response.code(200);
   return response;
@@ -196,15 +196,15 @@ const deleteBookByIdHandler = (request, h) => {
   if (bookIndex !== -1) {
     bookshelf.splice(bookIndex, 1);
     const response = h.response({
-      status: "success",
-      message: "Buku berhasil dihapus",
+      status: 'success',
+      message: 'Buku berhasil dihapus',
     });
     response.code(200);
     return response;
   }
   const response = h.response({
-    status: "fail",
-    message: "Buku gagal dihapus. Id tidak ditemukan",
+    status: 'fail',
+    message: 'Buku gagal dihapus. Id tidak ditemukan',
   });
   response.code(404);
   return response;
