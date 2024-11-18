@@ -93,7 +93,7 @@ const getAllBooksHandler = (request, h) => {
     status: "success",
     data: {
       books: getBookFiltered.map((book) => ({
-        id: book.book.id,
+        id: book.id,
         name: book.name,
         publisher: book.publisher,
       })),
